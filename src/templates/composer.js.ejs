@@ -1,0 +1,32 @@
+{
+    "name": "studio-visual/<%= props.nameSlugComposer %>",
+    "description": "<%= props.name %>",
+    "repositories":[
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org",
+            "only": [
+                "wpackagist-plugin/*",
+                "wpackagist-theme/*"
+            ]
+        }
+    ],
+    "require": {
+        "johnpbloch/wordpress": "6.0.2"
+    },
+    "extra": {
+        "installer-paths": {
+            "plugins/{$name}/": [
+                "type:wordpress-plugin"
+            ],
+            "wordpress-install-dir": "wordpress"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "roots/wordpress-core-installer": true,
+            "johnpbloch/wordpress-core-installer": true
+        }
+    }
+}

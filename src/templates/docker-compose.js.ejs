@@ -1,0 +1,27 @@
+version: "3"
+services:
+  <%= props.nameSlug %>_db:
+    image: mariadb:10
+    container_name: <%= props.nameSlug %>_db
+    volumes:
+      - ./mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_USER=root
+      - MYSQL_DATABASE=<%= props.nameSlug %>
+      - MYSQL_ROOT_PASSWORD=root
+  <%= props.nameSlug %>_web:
+    image: webdevops/php-nginx:8.1
+    container_name: <%= props.nameSlug %>_web
+    ports:
+      - "80:80"
+    links:
+      - <%= props.nameSlug %>_db
+    volumes:
+      - ./wordpress/:/var/www/html
+      - ./themes/:/var/www/html/wp-content/themes
+      - ./plugins/:/var/www/html/wp-content/plugins
+    environment:
+      - WEB_DOCUMENT_ROOT=/var/www/html/
+      - PHP_MEMORY_LIMIT=1G
