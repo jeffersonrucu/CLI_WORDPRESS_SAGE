@@ -2,20 +2,13 @@
 
 A CLI for studiovisualcli.
 
-## Customizing your CLI
-
-Check out the documentation at https://github.com/infinitered/gluegun/tree/master/docs.
-
-## Publishing to NPM
-
-To package your CLI up for NPM, do this:
+# Iniciando CLI
 
 ```shell
-$ npm login
-$ npm whoami
-$ npm test
-
-$ npm publish
+$ yarn global add gluegun
+$ yarn
+$ yarn link
+$ studiovisualcli
 ```
 
 # License
