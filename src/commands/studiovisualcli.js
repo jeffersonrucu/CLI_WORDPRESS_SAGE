@@ -6,22 +6,20 @@ const {
   askSage,
   askPlugins,
 } = require('../functions/questions')
-const { commandBashDefault } = require('../functions/bash')
 
 const command = {
-  name: 'create',
+  name: 'studiovisualcli',
   run: async (toolbox) => {
-    const nameSlug = textToSlug(name)
-    const nameSlugComposer = textToSlug(name, '-')
-    const allAsk = [askName, askDescription, askSage, askPlugins]
-
     // mensagem de boas vindas
     toolbox.print.info(welcome())
 
     // inicia as perguntas
+    const allAsk = [askName, askDescription, askSage, askPlugins]
     const { name, description, version, sage } = await toolbox.prompt.ask(
       allAsk
     )
+    const nameSlug = textToSlug(name)
+    const nameSlugComposer = textToSlug(name, '-')
 
     // cria arquivos do docker
     await toolbox.template.generate({
@@ -60,10 +58,10 @@ const command = {
 
     // roda comandos bash para o projeto
     await toolbox.system.run(`   
-      cd ${name} &&
+      cd ${nameSlug} &&
       composer install
-      composer create-project roots/sage themes/${name} &&
-      cd themes/${name} &&
+      composer create-project roots/sage themes/${nameSlug} &&
+      cd themes/${nameSlug} &&
       composer install &&
       yarn &&
       yarn build
