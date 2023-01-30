@@ -15,7 +15,7 @@ const command = {
 
     // inicia as perguntas
     const allAsk = [askName, askDescription, askSage, askPlugins]
-    const { name, description, version, sage } = await toolbox.prompt.ask(
+    const { name, description, sage, plugins } = await toolbox.prompt.ask(
       allAsk
     )
     const nameSlug = textToSlug(name)
@@ -50,19 +50,30 @@ const command = {
     await toolbox.template.generate({
       template: 'composer.js.ejs',
       target: `${nameSlug}/composer.json`,
-      props: { name, nameSlugComposer },
+      props: { nameSlugComposer, description },
     })
 
     // inicia loading
     const spinner = toolbox.print.spin('Criando seu projeto')
 
     // roda comandos bash para o projeto
-    await toolbox.system.run(`   
+    let installSage = `composer create-project roots/sage themes/${nameSlug}`
+
+    // switch (sage) {
+    //   // case 'v9.0':
+    //   //   installSage = `composer create-project roots/sage themes/${nameSlug} 9.x-dev`
+    //   //   break
+    //   // case 'v10.0':
+    //   //   installSage = `composer create-project roots/sage themes/${nameSlug} 10`
+    //   //   break
+    // }
+
+    await toolbox.system.run(`
       cd ${nameSlug} &&
-      composer install
-      composer create-project roots/sage themes/${nameSlug} &&
+      composer install --ignore-platform-reqs
+      ${installSage} &&
       cd themes/${nameSlug} &&
-      composer install &&
+      composer install --ignore-platform-reqs &&
       yarn &&
       yarn build
     `)

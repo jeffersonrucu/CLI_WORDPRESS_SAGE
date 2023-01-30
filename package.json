@@ -1,8 +1,8 @@
 {
-  "name": "studiovisualcli",
+  "name": "@jeffersonrucu@studiovisualcli",
   "version": "0.0.1",
   "description": "studiovisualcli CLI",
-  "private": true,
+  "private": false,
   "bin": {
     "studiovisualcli": "bin/studiovisualcli"
   },
