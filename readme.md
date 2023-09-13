@@ -5,7 +5,7 @@ A CLI for studiovisualcli.
 # Iniciando CLI
 
 ```shell
-$ npm global add gluegun
+$ npm global add gluegun (Acho que não precisa)
 $ npm
 $ npm link
 $ studiovisualcli
