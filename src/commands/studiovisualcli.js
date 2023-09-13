@@ -74,8 +74,8 @@ const command = {
       ${installSage} &&
       cd themes/${nameSlug} &&
       composer install --ignore-platform-reqs &&
-      yarn &&
-      yarn build
+      npm install &&
+      npm run build
     `)
 
     // finaliza loading
