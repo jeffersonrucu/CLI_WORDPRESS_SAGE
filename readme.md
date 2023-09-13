@@ -5,9 +5,9 @@ A CLI for studiovisualcli.
 # Iniciando CLI
 
 ```shell
-$ yarn global add gluegun
-$ yarn
-$ yarn link
+$ npm global add gluegun
+$ npm
+$ npm link
 $ studiovisualcli
 ```
 
